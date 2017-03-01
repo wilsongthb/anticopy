@@ -3,18 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Storage;
-use DB;
 use DateTime;
+use DB;
+use Storage;
 
 class principalController extends Controller
 {
     public function index(){
         return view('principal');
     }
-    public function archivos(){
+    public function archivos(Request $request){
+        if($request->buscar){
+            $archivos = DB::table('archivos')
+                ->where('nombre', 'LIKE', '%'.$request->buscar.'%')
+                ->paginate(5);
+        }else{
+            $archivos = DB::table('archivos')
+                ->paginate(5);
+        }
+        
         return view('anticopy.archivos', 
-            ['archivos' => DB::table('archivos')->paginate(15)]
+            ['archivos' => $archivos]
         );
     }
     public function subirarchivo(Request $request){
@@ -33,5 +42,15 @@ class principalController extends Controller
             // return response()->file($np);
             return redirect('/archivos');
         }
+    }
+    public function eliminararchivo(Request $request){
+        $id = $request->get('id');
+        $archivo = DB::table('archivos')->where('id', $id)->get()[0];
+        if($request->get('confirm')){
+            DB::table('archivos')->where('id', $id)->delete();
+            Storage::delete($archivo->path);
+            return redirect('/archivos');
+        }
+        return view('anticopy.eliminararchivo', ['archivo' => $archivo]);
     }
 }

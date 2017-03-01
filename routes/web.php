@@ -19,7 +19,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-
 Route::get('/principal', 'principalController@index');
 Route::get('/archivos', 'principalController@archivos');
+Route::post('/archivos', 'principalController@archivos');
 Route::post('/subirarchivo', 'principalController@subirarchivo');
+Route::get('/eliminararchivo', 'principalController@eliminararchivo');

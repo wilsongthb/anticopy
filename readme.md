@@ -1,3 +1,7 @@
+#Acerca de este proyecto
+
+Proyecto para continuar con el proyecto VRI-APP con nuevas funciones y mejoras, mas orientado a php
+
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">

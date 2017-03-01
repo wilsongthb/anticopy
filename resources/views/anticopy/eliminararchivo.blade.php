@@ -1,18 +1,3 @@
-<?php
-function formatBytes($bytes, $precision = 2) { 
-    $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
-
-    $bytes = max($bytes, 0); 
-    $pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
-    $pow = min($pow, count($units) - 1); 
-
-    // Uncomment one of the following alternatives
-    $bytes /= pow(1024, $pow);
-    // $bytes /= (1 << (10 * $pow)); 
-
-    return round($bytes, $precision) . ' ' . $units[$pow]; 
-} 
-?>
 @extends('principal')
 @section('cuerpo')
 
@@ -55,38 +40,17 @@ function formatBytes($bytes, $precision = 2) {
     
     <div class="row">
         
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h3>Lista de Archivos</h3>
-            <form action="{{url('/archivos')}}" method="POST">
-                <input type="text" class="form-control" placeholder="Buscar" name="buscar">
-                {{csrf_field()}}
-            </form>
-            <hr>
-            <table class="table table-hover table-responsive table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Tamaño</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($archivos as $item)
-                    <tr>
-                        <td>
-                            <a href="{{asset(\Storage::url($item->path))}}" class="btn">{{$item->nombre}}</a>
-                        </td>
-                        <td>
-                            {{formatBytes($item->size)}}
-                        </td>
-                        <td>
-                            <a href="{{url('/eliminararchivo').'?id='.$item->id}}" class="btn btn-danger" title="Eliminar">E</a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            {{$archivos->links()}}
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Eliminar archivo?</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>{{print_r($archivo, true)}}</pre>
+                    <a href="{{url('/eliminararchivo').'?id='.$archivo->id}}&confirm=1" class="btn btn-success">Si</a>
+                    <a href="{{URL::previous()}}" class="btn btn-default">No</a>
+                </div>
+            </div>
         </div>
         
     </div>

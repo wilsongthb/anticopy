@@ -42,6 +42,18 @@
         </nav>
         
         @yield('cuerpo')
+
+        
+        <div class="jumbotron">
+            <div class="container">
+                <h1>Mas de nosotros :D</h1>
+                <p>Contents ...</p>
+                <p>
+                    <a class="btn btn-primary btn-lg">Learn more</a>
+                </p>
+            </div>
+        </div>
+        
         <!-- jQuery -->
         <script src="//code.jquery.com/jquery.js"></script>
         <!-- Bootstrap JavaScript -->
