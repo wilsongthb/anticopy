@@ -28,3 +28,5 @@ Route::post('/subirarchivo', 'principalController@subirarchivo');
 Route::get('/eliminararchivo', 'principalController@eliminararchivo');
 // Route::get('/descargar/{id}', 'principalController@aux_descargar');
 Route::get('/descargar/{id}/{nombre}', 'principalController@descargar');
+
+// Gestion de evaluaciones

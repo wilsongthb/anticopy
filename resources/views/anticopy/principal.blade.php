@@ -51,6 +51,8 @@
             <div class="container">
                 <br>
                 LARAVEL START: {{LARAVEL_START}}
+                <br>
+                {{DummyFunction()}}
                 <!--<h1>Mas de nosotros :D</h1>
                 <p>Contents ...</p>
                 <p>
