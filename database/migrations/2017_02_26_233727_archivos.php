@@ -17,7 +17,7 @@ class Archivos extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('path');
-            $table->string('mimetype', 15);
+            $table->string('mimetype', 30);
             $table->char('size', 15);
             $table->timestamps();
         });

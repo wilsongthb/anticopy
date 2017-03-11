@@ -20,7 +20,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/principal', 'principalController@index');
+
+// Gestion de Archivos
 Route::get('/archivos', 'principalController@archivos');
 Route::post('/archivos', 'principalController@archivos');
 Route::post('/subirarchivo', 'principalController@subirarchivo');
 Route::get('/eliminararchivo', 'principalController@eliminararchivo');
+// Route::get('/descargar/{id}', 'principalController@aux_descargar');
+Route::get('/descargar/{id}/{nombre}', 'principalController@descargar');

@@ -13,7 +13,7 @@ function formatBytes($bytes, $precision = 2) {
     return round($bytes, $precision) . ' ' . $units[$pow]; 
 } 
 ?>
-@extends('principal')
+@extends('anticopy.principal')
 @section('cuerpo')
 
 <div class="container">
@@ -36,10 +36,9 @@ function formatBytes($bytes, $precision = 2) {
                                     <div class="form-group">
                                         <label for="">Selecciona el archivo para subir:</label>
                                         <input type="file" class="form-control" name="archivo">
+                                        <label for=""><small>Tamaño maximo 50mb</small></label>
                                     </div>
                                     
-                                    
-                                
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -74,17 +73,31 @@ function formatBytes($bytes, $precision = 2) {
                     @foreach($archivos as $item)
                     <tr>
                         <td>
-                            <a href="{{asset(\Storage::url($item->path))}}" class="btn">{{$item->nombre}}</a>
+                            {{(strlen($item->nombre) > 40) ? substr($item->nombre, 0, 40).'...' : $item->nombre}}
                         </td>
                         <td>
                             {{formatBytes($item->size)}}
                         </td>
                         <td>
-                            <a href="{{url('/eliminararchivo').'?id='.$item->id}}" class="btn btn-danger" title="Eliminar">E</a>
+                            <a href="{{url('/descargar/'.$item->id.'/'.$item->nombre)}}" title="Descargar">
+                                <button class="btn">
+                                    <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+                                </button>
+                            </a>
+                            <a href="{{asset(\Storage::url($item->path))}}" title="Servir">
+                                <button class="btn btn-warning">
+                                    <span class="glyphicon glyphicon-magnet" aria-hidden="true"></span>
+                                </button>
+                            </a>
+                            <a href="{{url('/eliminararchivo').'?id='.$item->id}}" title="Eliminar">
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
-                </tbody>
+                </tbody> 
             </table>
             {{$archivos->links()}}
         </div>

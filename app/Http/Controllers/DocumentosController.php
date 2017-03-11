@@ -16,7 +16,7 @@ class DocumentosController extends Controller
     {
         if($request->buscar){
             $archivos = ArchivosModel::where('mimetype', 'LIKE', '%pdf')
-                ->Where('nombre', '%'.$request->buscar.'%')
+                ->where('nombre', '%'.$request->buscar.'%')
                 ->paginate();
         }else{
             $archivos = ArchivosModel::where('mimetype', 'LIKE', '%pdf')
