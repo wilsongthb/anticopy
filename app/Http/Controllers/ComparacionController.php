@@ -3,26 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ArchivosModel;
 
-class DocumentosController extends Controller
+class ComparacionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        if($request->buscar){
-            $archivos = ArchivosModel::where('mimetype', 'LIKE', '%pdf')
-                ->where('nombre', '%'.$request->buscar.'%')
-                ->paginate();
-        }else{
-            $archivos = ArchivosModel::where('mimetype', 'LIKE', '%pdf')
-                ->paginate();
-        }
-        return $archivos;
+        return view('anticopy.comparar');
     }
 
     /**

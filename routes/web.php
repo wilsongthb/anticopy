@@ -19,14 +19,28 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::get('/principal', 'principalController@index');
+Route::get('/principal', 'PrincipalController@index');
 
 // Gestion de Archivos
-Route::get('/archivos', 'principalController@archivos');
-Route::post('/archivos', 'principalController@archivos');
-Route::post('/subirarchivo', 'principalController@subirarchivo');
-Route::get('/eliminararchivo', 'principalController@eliminararchivo');
-// Route::get('/descargar/{id}', 'principalController@aux_descargar');
-Route::get('/descargar/{id}/{nombre}', 'principalController@descargar');
+Route::get('/archivos', 'ArchivosController@archivos');
+Route::post('/archivos', 'ArchivosController@archivos');
+Route::post('/subirarchivo', 'ArchivosController@subirarchivo');
+Route::get('/eliminararchivo', 'ArchivosController@eliminararchivo');
+Route::get('/descargar/{id}', 'ArchivosController@aux_descargar');
+Route::get('/descargar/{id}/{nombre}', 'ArchivosController@descargar');
 
-// Gestion de evaluaciones
+// Gestion de Archivos CRUDs AngularJS
+Route::get('crud_angular', 'PrincipalController@angular');
+
+// Convertir Archivos
+Route::get('/convertir', 'PrincipalController@archivosconvertibles');
+Route::post('/convertir', 'PrincipalController@convertir');
+
+// Gestion de evaluaciones y comparaciones
+Route::get('/comparar', 'ComparacionController@index');
+
+// Prueba
+// Route::get('/console/{comando}', function($comando){
+//     echo '<pre>'.$comando.'<br>';
+//     echo consola($comando);
+// });

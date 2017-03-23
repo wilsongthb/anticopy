@@ -3,70 +3,71 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DateTime;
 use DB;
+use App\ArchivosModel;
 use Storage;
+use DateTime;
 
 class principalController extends Controller
 {
     public function index(){
         return view('anticopy.principal');
     }
-    public function archivos(Request $request){
+    public function angular(){
+        return view('anticopy.jsfe.angular');
+    }
+
+    /*
+        Muestra el listado de los archivos subidos que pueden ser convertidos
+    */
+    public function archivosconvertibles(Request $request){
         if($request->buscar){
             $archivos = DB::table('archivos')
                 ->where('nombre', 'LIKE', '%'.$request->buscar.'%')
+                ->where('mimetype', 'application/pdf')
                 ->paginate(5);
         }else{
             $archivos = DB::table('archivos')
+                ->where('mimetype', 'application/pdf')
                 ->paginate(5);
         }
-        
-        return view('anticopy.archivos', 
+
+        return view('anticopy.convertir', 
             ['archivos' => $archivos]
         );
     }
-    public function subirarchivo(Request $request){
-        if($request->hasFile('archivo')){
-            $path = $request->file('archivo')->store('public');
 
-            // Asigna un mimetype personalizado en el archivo mimetype.php de config
-            $ext = pathinfo($request->file('archivo')->getClientOriginalName(), PATHINFO_EXTENSION);
-            $key = 'mimetypes.'.$ext;
-            $mimetype = (config()->has($key)) ? config($key) : $mimetype = $request->file('archivo')->getMimeType();
+    /*
+        Accion de convertir
+    */
+    public function convertir(Request $request){
+        $archivo = ArchivosModel::find($request->id);
 
-            $archivo = [
-                'nombre' => $request->file('archivo')->getClientOriginalName(),
-                'path' => $path,
-                'mimetype' => $mimetype,
-                'size' => $request->file('archivo')->getClientSize(),
-                'created_at' => new DateTime()
-            ];
-            DB::table('archivos')->insert($archivo);
-            // $np = substr(Storage::url($path), 1);
-            // return response()->file($np);
-            return redirect('/archivos');
-        }
-    }
-    // public function aux_descargar($id){
-    //     $archivo = DB::table('archivos')->where('id', $id)->get()[0];
-    //     return redirect('/descargar/'.$id.'/'.$archivo->nombre);
-    // }
-    public function descargar($id, $nombre){
-        $archivo = DB::table('archivos')->where('id', $id)->get()[0];
-        $bin = Storage::get($archivo->path);
-        return response()->make($bin, 200, ['Content-type' => $archivo->mimetype]);
-    }
-    public function eliminararchivo(Request $request){
-        $id = $request->get('id');
-        $archivo = DB::table('archivos')->where('id', $id)->get()[0];
-        if($request->get('confirm')){
-            // Eliminar el archivo
-            DB::table('archivos')->where('id', $id)->delete();
-            Storage::delete($archivo->path);
-            return redirect('/archivos');
-        }
-        // Muestra el mensaje de confirmacion
-        return view('anticopy.eliminararchivo', ['archivo' => $archivo]);
+        // $dir =  storage_path('app\\'.str_replace('/', '\\', $archivo->path));
+        $dir = storage_path('app/'.$archivo->path);
+
+        // convirtiendo con xpdf
+        // $fast = config('system.pdftotext').' '.$dir.' -'; // convierte y devuelve toda la cadena txt, no guarda en disco aun
+        $d = new DateTime();
+        $txt = pathNombre($archivo->path).$d->getTimestamp().'.txt';
+        $path = storage_path('app/txts/'.$txt);
+        $fast = config('system.pdftotext').' -enc UTF-8 '.$dir.' '.$path; // convierte y guarda en la carpeta txts
+
+        $output = consola($fast);
+
+        // guardar en la base de datos
+        DB::table('archivos')->insert([
+            'nombre' => $archivo->nombre.'.txt',
+            'path' => 'txts/'.$txt,
+            'mimetype' => 'text/plain',
+            'size' => filesize($path),
+            'created_at' => new DateTime()
+        ]);
+
+        return [
+            'data' => [
+                'nombre' => $archivo->nombre.'.txt'
+            ]
+        ];
     }
 }

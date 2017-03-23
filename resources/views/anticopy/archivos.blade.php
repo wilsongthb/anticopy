@@ -1,18 +1,3 @@
-<?php
-function formatBytes($bytes, $precision = 2) { 
-    $units = array('B', 'KB', 'MB', 'GB', 'TB'); 
-
-    $bytes = max($bytes, 0); 
-    $pow = floor(($bytes ? log($bytes) : 0) / log(1024)); 
-    $pow = min($pow, count($units) - 1); 
-
-    // Uncomment one of the following alternatives
-    $bytes /= pow(1024, $pow);
-    // $bytes /= (1 << (10 * $pow)); 
-
-    return round($bytes, $precision) . ' ' . $units[$pow]; 
-} 
-?>
 @extends('anticopy.principal')
 @section('cuerpo')
 
@@ -66,6 +51,7 @@ function formatBytes($bytes, $precision = 2) {
                     <tr>
                         <th>Nombre</th>
                         <th>Tamaño</th>
+                        <th>Tipo</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -79,7 +65,10 @@ function formatBytes($bytes, $precision = 2) {
                             {{formatBytes($item->size)}}
                         </td>
                         <td>
-                            <a href="{{url('/descargar/'.$item->id.'/'.$item->nombre)}}" title="Descargar">
+                            {{$item->mimetype}}
+                        </td>
+                        <td>
+                            <a href="{{linkDescarga($item)}}" title="Descargar">
                                 <button class="btn">
                                     <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
                                 </button>

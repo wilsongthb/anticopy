@@ -40,8 +40,15 @@
                     <a href="{{url('/archivos')}}">Archivos</a>
                 </li>
                 <li>
-                    <a href="#">Link</a>
+                    <a href="{{url('/convertir')}}">Convertir</a>
                 </li>
+                <li>
+                    <a href="{{url('/comparar')}}">Comparar</a>
+                </li>
+                <li>
+                    <a href="{{url('/crud_angular')}}">Crud Angularjs</a>
+                </li>
+                
             </ul>
         </nav>
         
@@ -69,5 +76,12 @@
         <script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
         <!--Vue JS-->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.js"></script>-->
+        <script>
+        var APP_URL = "{{url('')}}";
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+        </script>
+        @stack('script')
     </body>
 </html>
