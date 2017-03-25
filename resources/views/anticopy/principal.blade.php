@@ -18,14 +18,14 @@
         <![endif]-->
         <!-- W3S CSS -->
         <!--<link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">-->
-        <link rel="stylesheet" href="{{asset('css/w3.css')}}">
+        {{-- <link rel="stylesheet" href="{{asset('css/w3.css')}}"> --}}
     </head>
     <body>
         
         <div class="jumbotron">
             <div class="container">
                 <h1>ANTICOPY</h1>
-                <p>Aplicacion para comprobar plagio entre diferentes tipos de documentos</p>
+                <p>Aplicacion para buscar partes iguales entre diferentes tipos de documentos</p>
                 <!--<p>
                     <a class="btn btn-primary btn-lg">Aprenda mas</a>
                 </p>-->
@@ -57,9 +57,9 @@
         <div class="jumbotron">
             <div class="container">
                 <br>
-                LARAVEL START: {{LARAVEL_START}}
+                {{-- LARAVEL START: {{LARAVEL_START}}
                 <br>
-                {{DummyFunction()}}
+                {{DummyFunction()}} --}}
                 <!--<h1>Mas de nosotros :D</h1>
                 <p>Contents ...</p>
                 <p>

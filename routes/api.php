@@ -18,3 +18,6 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::resource('/archivos', 'ArchivosResource');
+// Route::get('getcontent', function(){
+
+// });
