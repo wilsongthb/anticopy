@@ -72,10 +72,14 @@ function enviar(id){
         }
     }).done(function(response){
         console.log(response)
-        $('#confirmacion').html('<div class="alert alert-success" ><strong>Guardado como: </strong> ' + response.data.nombre + '</div><hr>');
+        if(response.data.return_val == 0){
+            $('#confirmacion').html('<div class="alert alert-success" ><strong>Guardado como: </strong> ' + response.data.nombre + '</div><hr>');
+        }else{
+            $('#confirmacion').html('<div class="alert alert-danger" ><strong>Error: </strong> ' + response.data.output + '</div><hr>');
+        }
         setTimeout(function() {
-            $('#confirmacion').html('');
-        }, 4000);
+                $('#confirmacion').html('');
+            }, 15000);
     })
 }
 </script>    

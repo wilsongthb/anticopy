@@ -8,17 +8,18 @@ if (!function_exists('consola')) {
      * @param
      * @return
      */
-    function consola($comando)
+    function consola($comando, &$return_val)
     {
         if(config('system.OS') == 'windows'){
             $comando .= ' 2>&1';
         }
 
-        exec($comando, $arr_output);
+        exec($comando, $arr_output, $return_val);
 
         $output = '';
         foreach ($arr_output as $key => $value) {
-            $output .= $value.'\n';
+            // $output .= $value.'\n';
+            $output .= $value.PHP_EOL;
         }
 
         return $output;

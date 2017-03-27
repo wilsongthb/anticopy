@@ -53,20 +53,27 @@ class principalController extends Controller
         $path = storage_path('app/txts/'.$txt);
         $fast = config('system.pdftotext').' -enc UTF-8 '.$dir.' '.$path; // convierte y guarda en la carpeta txts
 
-        $output = consola($fast);
+        $return_val = -14;
+        $output = consola($fast, $return_val);
 
-        // guardar en la base de datos
-        DB::table('archivos')->insert([
-            'nombre' => $archivo->nombre.'.txt',
-            'path' => 'txts/'.$txt,
-            'mimetype' => 'text/plain',
-            'size' => filesize($path),
-            'created_at' => new DateTime()
-        ]);
+        // exit($return_val.':'.$output);
+
+        if($return_val == 0){
+            // guardar en la base de datos
+            DB::table('archivos')->insert([
+                'nombre' => $archivo->nombre.'.txt',
+                'path' => 'txts/'.$txt,
+                'mimetype' => 'text/plain',
+                'size' => filesize($path),
+                'created_at' => new DateTime()
+            ]);
+        }
 
         return [
             'data' => [
-                'nombre' => $archivo->nombre.'.txt'
+                'nombre' => $archivo->nombre.'.txt',
+                'return_val' => $return_val,
+                'output' => $output
             ]
         ];
     }

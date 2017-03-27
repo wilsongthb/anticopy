@@ -34,10 +34,10 @@ class ArchivosResource extends Controller
         if($request->get('buscar')){
             $archivos = DB::table('archivos')
                 ->where('nombre', 'LIKE', '%'.$request->buscar.'%')
-                ->paginate(5);
+                ->paginate(15);
         }else{
             $archivos = DB::table('archivos')
-                ->paginate(5);
+                ->paginate(15);
         }
         return $archivos;
     }

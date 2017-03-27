@@ -16,9 +16,15 @@ Vue.component('archivo', {
                 this.archivos = response.data.data;
             })
         },
-        definir_archivo: function(id){
-            // console.log(a);
-            this.$emit('seleccionar', id);
+        definir_archivo: function(item){
+            console.log(item);
+            this.$emit('seleccionar', item);
+        },
+        formatBytes: function(bytes) { 
+            return G_formatBytes(bytes);
+        },
+        linkDescarga: function(item){
+            return APP_URL + '/descargar/' + item;
         }
     },
     created: function(){

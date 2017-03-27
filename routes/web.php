@@ -38,6 +38,7 @@ Route::post('/convertir', 'PrincipalController@convertir');
 
 // Gestion de evaluaciones y comparaciones
 Route::get('/comparar', 'ComparacionController@index');
+Route::post('/comparar', 'ComparacionController@comparador');
 
 // Prueba
 // Route::get('/console/{comando}', function($comando){
