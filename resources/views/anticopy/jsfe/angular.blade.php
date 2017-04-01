@@ -53,6 +53,6 @@
 @endsection
 
 @push('script')
-<script src=" {{asset('dist\js\angular.js')}} "></script>
+<script src=" {{asset('bower_components\angular\angular.min.js')}} "></script>
 <script src=" {{asset('js\angular_app.js')}} "></script>
 @endpush

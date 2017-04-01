@@ -8,7 +8,7 @@ Vue.component('comparador',{
             resultados: [],
             comparando: false,
             minimo: 100,
-            salto: 10
+            salto: 15
         }
     },
     methods: {

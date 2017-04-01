@@ -47,6 +47,9 @@ class ComparacionController extends Controller
 
         // return print_r([$archivo_1, $archivo_2],true);
     }
+    public function comparacion(){
+        return view('anticopy.comparacion');
+    }
 
     /**
      * Show the form for creating a new resource.

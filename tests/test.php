@@ -40,6 +40,7 @@ $tiempo_inicio = microtime_float();
 //     true
 // );
 // var_dump($r);
+
 $r = compararStrings(
     file_get_contents('C:\xampp\htdocs\dev\anticopy\storage\app\txts\033f16ddcbaa1504a277cb2de12e8beb.pdf1490622404.txt'),
     file_get_contents('C:\xampp\htdocs\dev\anticopy\storage\app\docs\60f15de87e9fcc3e1da1cb5740b60efa.txt'),
@@ -48,7 +49,6 @@ $r = compararStrings(
     true
 );
 var_dump($r);
-
 
 // file_put_contents('out.txt', json_encode($r));
 file_put_contents('out.txt', print_r($r, true));

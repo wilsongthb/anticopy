@@ -8,7 +8,7 @@
 
         <!-- Bootstrap CSS -->
         <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">-->
-        <link href="{{asset('dist/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{asset('bower_components\bootstrap\dist\css\bootstrap.min.css')}}" rel="stylesheet">
 
         
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,6 +46,9 @@
                 <li>
                     <a href="{{url('/comparar')}}">Comparar</a>
                 </li>
+                <li>
+                    <a href="{{url('/comparacion')}}">Comparación</a>
+                </li>
                 {{-- <li>
                     <a href="{{url('/crud_angular')}}">Crud Angularjs</a>
                 </li> --}}
@@ -70,10 +73,10 @@
         
         <!-- jQuery -->
         <!--<script src="//code.jquery.com/jquery.js"></script>-->
-        <script src="{{asset('dist/jquery.min.js')}}"></script>
+        <script src="{{asset('bower_components\jquery\dist\jquery.min.js')}}"></script>
         <!-- Bootstrap JavaScript -->
         <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
-        <script src="{{asset('dist/js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('bower_components\bootstrap\dist\js\bootstrap.min.js')}}"></script>
         <!--Vue JS-->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.1/vue.js"></script>-->
         <script>
