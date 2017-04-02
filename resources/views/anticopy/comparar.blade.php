@@ -4,8 +4,16 @@
 <div class="container" id="app">
 <!--<div class="container-fluid" id="app">-->
     <div class="row">
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h3>Realiza comparaciones rapidas <br><small>Compara archivos TXT y encuentra coincidencias rapidamente con esta herramienta, recuerda que mientras menor sea la velocidad, mucho mas tiempo estara comparando, si sobrepasa 120 segundos, la operacion a fallado por sobrepasar el tiempo maximo de ejecucion, si quieres realizar comparaciones mas exactas usa el <a href="{{url('/comparacion')}}">Comparador Background</a></small></h3>
+        </div>
+        
+    </div>
+    <div class="row">
         <h3>Comparar</h3>
         <comparador></comparador>
+        <br>
     </div>
 </div>
 <style>
@@ -75,39 +83,6 @@
 </template>
 <template id="comparador">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <!--<button type="button" class="btn btn-large btn-block btn-success" @click="comparar">Comparar</button>-->
-            <template v-if="!comparando">
-                <button type="button" class="btn btn-success" @click="comparar">
-                    Comparar
-                </button>    
-                <div class="form-group">
-                    <label for="">Longitud minima</label>
-                    <input type="number" class="form-control" v-model="minimo">
-                </div>
-                <div class="form-group">
-                    <label for="">Velocidad, Salto</label>
-                    <input type="number" class="form-control" v-model="salto">
-                </div>
-            </template>
-            <template v-else>
-                <button type="button" class="btn btn-success">
-                    <span v-show="comparando" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-                    Comparando
-                </button>    
-            </template>
-            
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div v-for="(r, key, index) in resultados">
-                <!--<button id="demo" onclick="copyToClipboard(document.getElementById('demo').innerHTML)">This is what I want to copy</button>-->
-                <!--<button @click="copy(key)" type="button" class="btn btn-default">Copiar al Portapapeles</button>-->
-                <pre :id="key + 'contenido'">@{{r}}</pre>
-                <!--<div class="vista-previa" :id="key + 'contenido'">
-                    @{{r}}
-                </div>-->
-            </div>
-        </div>
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <h3>Archivo Base</h3>
             <a class="btn btn-primary" data-toggle="modal" href='#archivo' v-on:click="select = 1">Seleccionar</a>
@@ -144,8 +119,45 @@
                 <!--<pre>@{{archivo_2.contenido}}</pre>-->
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <hr>
+            <!--<button type="button" class="btn btn-large btn-block btn-success" @click="comparar">Comparar</button>-->
+            <template v-if="!comparando">
+                <button type="button" class="btn btn-success" @click="comparar">
+                    Comparar
+                </button>    
+                <div class="form-group">
+                    <label for="">Longitud minima</label>
+                    <input type="number" class="form-control" v-model="minimo">
+                </div>
+                <div class="form-group">
+                    <label for="">Velocidad, Salto</label>
+                    <input type="number" class="form-control" v-model="salto">
+                </div>
+                <div class="form-group">
+                    <label for="">Sobre Codificar resultados en utf-8</label>
+                    <input type="checkbox" v-model="utf_8">
+                </div>
+            </template>
+            <template v-else>
+                <button type="button" class="btn btn-success">
+                    <span v-show="comparando" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                    Comparando
+                </button>    
+            </template>
+            <hr>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div v-for="(r, key, index) in resultados">
+                <!--<button id="demo" onclick="copyToClipboard(document.getElementById('demo').innerHTML)">This is what I want to copy</button>-->
+                <!--<button @click="copy(key)" type="button" class="btn btn-default">Copiar al Portapapeles</button>-->
+                <pre :id="key + 'contenido'">@{{r}}</pre>
+                <!--<div class="vista-previa" :id="key + 'contenido'">
+                    @{{r}}
+                </div>-->
+            </div>
+        </div>
         <archivo v-on:seleccionar="seleccionar"></archivo>
-
     </div>
 </template>
 @endsection

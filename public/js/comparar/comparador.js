@@ -7,8 +7,10 @@ Vue.component('comparador',{
             archivo_2: {},
             resultados: [],
             comparando: false,
-            minimo: 100,
-            salto: 15
+            minimo: 20,
+            salto: 150,
+            reintentos: 5,
+            utf_8: false
         }
     },
     methods: {
@@ -36,11 +38,22 @@ Vue.component('comparador',{
                 archivo_1: this.archivo_1.id,
                 archivo_2: this.archivo_2.id,
                 minimo: this.minimo,
-                salto: this.salto
+                salto: this.salto,
+                utf_8: this.utf_8
             }).then(function(response){
                 // console.log(response);
                 this.comparando = false;
                 this.resultados = response.body;
+            }, function(response){
+                // Error
+                console.log('Error :(');
+                this.reintentos--;
+                if(this.reintentos >= 0){
+                    this.comparando = false;
+                    this.utf_8 = true;
+                    this.comparar();
+                    this.resultados = ['Error en el servidor, reintentando...'];
+                }
             })
         },
         copy: function(key){

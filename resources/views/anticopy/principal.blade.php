@@ -47,8 +47,11 @@
                     <a href="{{url('/comparar')}}">Comparar</a>
                 </li>
                 <li>
-                    <a href="{{url('/comparacion')}}">Comparación</a>
+                    <a href="{{url('/comparacion')}}">Comparación en Background</a>
                 </li>
+                {{-- <li>
+                    <a href="{{url('/comparacion')}}">Comparación en Background js</a>
+                </li> --}}
                 {{-- <li>
                     <a href="{{url('/crud_angular')}}">Crud Angularjs</a>
                 </li> --}}

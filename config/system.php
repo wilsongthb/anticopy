@@ -12,5 +12,6 @@ return [
     'pdftotext' => 'C:/xpdfbin-win-3.04/bin64/pdftotext',
 
     // Linux
+    // Instalar con: sudo apt install xpdf
     // 'pdftotext' => 'pdftotext',
 ];

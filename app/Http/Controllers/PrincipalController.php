@@ -25,11 +25,11 @@ class principalController extends Controller
             $archivos = DB::table('archivos')
                 ->where('nombre', 'LIKE', '%'.$request->buscar.'%')
                 ->where('mimetype', 'application/pdf')
-                ->paginate(5);
+                ->paginate(15);
         }else{
             $archivos = DB::table('archivos')
                 ->where('mimetype', 'application/pdf')
-                ->paginate(5);
+                ->paginate(15);
         }
 
         return view('anticopy.convertir', 

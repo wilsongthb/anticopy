@@ -18,13 +18,13 @@ $tiempo_inicio = microtime_float();
 //     1,
 //     true
 // );
-// $r = compararStrings(
-//     str_replace([' '],[' '],'Laravel es lo maximo y es la Hostia'),
-//     str_replace([' '],[' '],'Node JS es lo maximo y el futuro'),
-//     6,
-//     1,
-//     true
-// );
+$r = compararStrings(
+    str_replace([' '],[' '],'Laravel es lo maximo y es la Hostia'),
+    str_replace([' '],[' '],'Node JS es lo maximo y el futuro'),
+    6,
+    1,
+    true
+);
 // $r = compararStrings(
 //     str_replace([' ', "\n"], '', file_get_contents('C:\xampp\htdocs\dev\laravel_8010\public\php\files\txt\Hallasi Hallasi David _ Bustinza Sancho Saul Alfredo.txt')),
 //     str_replace([' ', "\n"], '', file_get_contents('C:\xampp\htdocs\dev\laravel_8010\public\php\files\txt\Hancco_Larico_Odila_Bertha.txt')),
@@ -41,13 +41,13 @@ $tiempo_inicio = microtime_float();
 // );
 // var_dump($r);
 
-$r = compararStrings(
-    file_get_contents('C:\xampp\htdocs\dev\anticopy\storage\app\txts\033f16ddcbaa1504a277cb2de12e8beb.pdf1490622404.txt'),
-    file_get_contents('C:\xampp\htdocs\dev\anticopy\storage\app\docs\60f15de87e9fcc3e1da1cb5740b60efa.txt'),
-    15,
-    1,
-    true
-);
+// $r = compararStrings(
+//     file_get_contents('C:\xampp\htdocs\dev\anticopy\storage\app\txts\033f16ddcbaa1504a277cb2de12e8beb.pdf1490622404.txt'),
+//     file_get_contents('C:\xampp\htdocs\dev\anticopy\storage\app\docs\60f15de87e9fcc3e1da1cb5740b60efa.txt'),
+//     15,
+//     1,
+//     true
+// );
 var_dump($r);
 
 // file_put_contents('out.txt', json_encode($r));
