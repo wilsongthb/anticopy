@@ -5,7 +5,7 @@
 
     <div class="row">
         
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
             <h3>Lista de Archivos</h3>
             <form action="{{url('/convertir')}}" method="GET">
                 <input type="text" class="form-control" placeholder="Buscar" name="buscar">
@@ -31,9 +31,9 @@
                     @foreach($archivos as $item)
                     <tr>
                         <td>
-                            {{(strlen($item->nombre) > 40) ? substr($item->nombre, 0, 40).'...' : $item->nombre}}
+                            {{recortar($item->nombre, 40)}}
                         </td>
-                        <td>
+                        <td class="text-right">
                             {{formatBytes($item->size)}}
                         </td>
                         <td>
@@ -43,7 +43,7 @@
                                 </button>
                             </a>
                             <a onclick="enviar({{$item->id}})" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> Convertir
                             </a>
                         </td>
                     </tr>

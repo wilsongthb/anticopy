@@ -1,4 +1,12 @@
 <?php
+/**
+* @description: Sirve para recortar strings muy largos si sobrepasan la longitud maxima
+* @param $str   string  String para recortar
+* @param $long  int     Longitud maxima antes de cortar
+*/
+function recortar($str, $long){
+    return (strlen($str) > $long) ? substr($str, 0, $long).'...' : $str;
+}
 if (!function_exists('DummyFunction')) {
 
     /**

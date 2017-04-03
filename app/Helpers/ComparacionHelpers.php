@@ -117,7 +117,6 @@ if (!function_exists('compararStrings')) {
 
         // Vars
         $foco = "";
-        
         $resultado = [];
 
         for ($i=0; $i < $length_str1; $i+=$longitud_salto) { 
@@ -125,6 +124,9 @@ if (!function_exists('compararStrings')) {
             $last_foco = "";
 
             $foco = substr($str1, $i, $longitud_minima);
+            if($console_mod){
+                Console_out('Foco:'.$foco);
+            }
 
             if(strlen($foco) < $longitud_minima){
                 continue;
@@ -133,9 +135,6 @@ if (!function_exists('compararStrings')) {
             // Comparacion
             $length_foco = $longitud_minima+$longitud_salto;
             while(stripos($str2, $foco) AND $length_foco<$length_str1){
-                if($console_mod){
-                    Console_out('Length:'.strlen($foco)."\t".'Foco:'.$foco);
-                }
                 $last_foco = $foco;
                 $foco = substr($str1, $i, $length_foco);
                 $length_foco += $longitud_salto;
@@ -144,18 +143,12 @@ if (!function_exists('compararStrings')) {
                 $i += strlen($last_foco)-$longitud_salto;
                 $resultado[] = $last_foco;
             }
-
-            if($console_mod){
-                // Console_out('Length:'.strlen($foco)."\t".'Foco:'.$foco);
-                Console_out('Posicion:'.$i."\tde:".$length_str1."\tEncontrados:".count($resultado));
-                Console_out('Tiempo:'.(time()-$inicio));
-            }
         }
 
         return $resultado;
     }
 }
 
-function resaltar($str, $id, &$txt){
-    return str_replace($str, '<span style="color:blue" id="'.$id.'">'.$str.'</span>', $txt);
+function resaltar($str, $id, &$txt, $color = 'blue'){
+    return str_replace($str, '<span style="color:'.$color.'" id="'.$id.'">'.$str.'</span>', $txt);
 }

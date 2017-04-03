@@ -4,7 +4,16 @@
 <div class="container">
 
     <div class="row">
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+            <h3>Lista de Archivos</h3>
             <a class="btn btn-primary" data-toggle="modal" href='#subirarchivo'>Subir Archivo</a>
             <hr>
             <div class="modal fade" id="subirarchivo">
@@ -33,14 +42,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    
-    <div class="row">
-        
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h3>Lista de Archivos</h3>
             <form action="{{url('/archivos')}}" method="POST">
                 <input type="text" class="form-control" placeholder="Buscar" name="buscar">
                 {{csrf_field()}}
@@ -59,9 +60,9 @@
                     @foreach($archivos as $item)
                     <tr>
                         <td>
-                            {{(strlen($item->nombre) > 40) ? substr($item->nombre, 0, 40).'...' : $item->nombre}}
+                            {{recortar($item->nombre, 40)}}
                         </td>
-                        <td>
+                        <td class="text-right">
                             {{formatBytes($item->size)}}
                         </td>
                         <td>

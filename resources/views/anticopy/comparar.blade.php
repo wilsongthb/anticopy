@@ -50,7 +50,7 @@
                                     <td>
                                         @{{(a.nombre.length > 30) ? a.nombre.substring(0, 30) + '...' : a.nombre}}
                                     </td>
-                                    <td>
+                                    <td class="text-right">
                                         @{{formatBytes(a.size)}}
                                     </td>
                                     <td>
@@ -82,6 +82,7 @@
     </div>
 </template>
 <template id="comparador">
+<div>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <h3>Archivo Base</h3>
@@ -119,8 +120,10 @@
                 <!--<pre>@{{archivo_2.contenido}}</pre>-->
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <hr>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <!--<button type="button" class="btn btn-large btn-block btn-success" @click="comparar">Comparar</button>-->
             <template v-if="!comparando">
                 <button type="button" class="btn btn-success" @click="comparar">
@@ -159,6 +162,7 @@
         </div>
         <archivo v-on:seleccionar="seleccionar"></archivo>
     </div>
+</div>
 </template>
 @endsection
 

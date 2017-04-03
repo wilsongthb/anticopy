@@ -16,6 +16,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Archivos</th>
+                        <th>Minimo</th>
                         <th>Estado</th>
                         <th>Progreso</th>
                         <th></th>
@@ -26,6 +27,7 @@
                     <tr>
                         <td>{{$item->id}} </td>
                         <td>{{$item->archivo1_id}} y  {{$item->archivo2_id}}</td>
+                        <td>{{$item->minimo}} </td>
                         @if($item->estado == 'c')
                             <td class="warning">En cola </td>
                         @elseif($item->estado == 'p')
